@@ -3,7 +3,7 @@ import os
 
 
 #intial setup for the flask system
-app= Flask(__name__)
+app= Flask(__name__, template_folder='Templates')
 app.secret_key="flyboy"
 
 #each app route method refers to either a page that can viewed or a backend function 
