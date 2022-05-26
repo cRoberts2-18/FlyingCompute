@@ -11,4 +11,4 @@ sys.path.insert(0, '/home/ubuntu/FlyingCompute')
 
 from app import app as application
 
-application.secret_key = 'Gertool31'
+application.secret_key = 'Flyboy'
