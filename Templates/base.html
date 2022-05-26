@@ -1,0 +1,112 @@
+<html translate="no">
+<link rel="stylesheet" href="style.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+
+
+
+<title>Base Camp view</title>
+</head>
+<header id="header">
+<h2 class="right">Base Camp View<h2>
+<div class="navbar">
+  <a href=#><optionL>Search</optionL></a>
+  <a href=#><optionL>Update</optionL></a>
+  <a href=#><optionL>Settings</optionL></a>
+  	
+</div>
+</header>
+
+<body>
+
+<>
+
+
+<div id="mySidebar" class="sidebar" style="width:250px">
+	
+	
+	<h2 style="color:white">Target information</h2>
+  <label for="Name">Target name:</label><br>
+  <input type="text" id="Name" placeholder="Target Name" name="Name"><br>
+  <label for="Age">Target Age:</label><br>
+  <input type="text" id="Age" placeholder="Target Age" name="Age"><br>
+  <label for="location">Last known location:</label><br>
+  <input type="text" id="location" placeholder="Last know location (click map)" name="location" readonly><br>
+  <label for="img">Trail List:</label><br>
+  <input style="float:center"type="file" id="Edges" name="Edges"><br>
+  <label for="img">Crossing List:</label><br>
+  <input style="float:center"type="file" id="Nodes" name="Nodes"><br>
+  <label for="img">Target image:</label><br>
+  <input style="float:center"type="file" id="img" name="img" accept="image/*" onchange="readURL(this);"><br>
+  <img id="target" src="#" alt="your image" /><br><br>
+  <label for="Teams">Number of search teams:</label><br>
+  <input type="number" id="Teams" placeholder="1" name="Teams"><br>
+	<input class="buttonstyle" type=button id = "Submit" value = "Begin Search" onclick="Start()"><br><br>
+  <table id="changeLog" class="changeTable">
+    <thead><tr><td>Update Log</td></tr></thead>
+    <tbody id="body"></tbody>
+  </table>
+	
+    	
+   
+</div>
+  
+<div id="main">
+    
+  <div id="map" class='map'></div>	
+  
+</div>
+  
+<script>
+     //attribute setup for the leaflet map
+     var map = L.map('map',{
+        center: [52.770775, -1.2043467],
+        zoom: 5,
+        zoomControl: false
+	    
+    });
+    L.control.zoom({position: 'topright'}).addTo(map);
+    
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+    }).addTo(map);
+
+    function onMapClickFirst(e) {
+        document.getElementById("location").value="Lat: "+(Math.round((e.latlng.wrap().lat)*100)/100)+", Long: "+(Math.round((e.latlng.wrap().lng)*100)/100);
+    }
+    
+    map.on('click', onMapClickFirst);
+
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#target')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    function Start(){
+      name=document.getElementById("Name").value;
+      age=document.getElementById("Age").value;
+      document.getElementById("body").innerHTML="<tr><td>Name: "+name+" Age: "+age+"</td></tr>";
+      document.getElementById("Submit").value="Target Found";
+      document.getElementById("Submit").onclick=Finish;
+
+    }
+
+    function Finish(){
+      document.getElementById("body").innerHTML+="<tr><td>Target found successfully</td></tr>";
+      document.getElementById("Submit").onclick=Start;
+    }
+
+</script>
+</body>
+</html>
