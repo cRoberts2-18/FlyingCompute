@@ -61,6 +61,7 @@
 </div>
   
 <script>
+     var nodes;	
      //attribute setup for the leaflet map
      var map = L.map('map',{
         center: [52.770775, -1.2043467],
@@ -95,8 +96,7 @@
             }
         }
     function Start(){
-      var nodes = document.getElementById("Nodes").files[0];
-      alert(nodes);
+      nodes = document.getElementById("Nodes").files[0];
       name=document.getElementById("Name").value;
       age=document.getElementById("Age").value;
       document.getElementById("body").innerHTML="<tr><td>Name: "+name+" Age: "+age+"</td></tr>";
@@ -111,7 +111,7 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			var $nodes = $("img").files;
+			var $nodes = $.csv.toArrays(nodes);
 			alert($nodes);
 			/*$.ajax({
     			method: "POST",
