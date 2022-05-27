@@ -170,6 +170,10 @@
 				temp=(temp.replace("{","")).replace("}","");
 				tempArray=temp.split(",");
 				for(let j=0; j<tempArray.length; j++){
+					if(j==tempArray.length-1){
+						tempArray[j]=tempArray[j].replace('r','');
+						tempArray[j]=tempArray[j].replaceAll('\\','');
+					}
 					tempArray[j]=tempArray[j].replace('"','');
 					tempArray[j]=tempArray[j].split(":")[1];
 				}
