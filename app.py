@@ -22,5 +22,5 @@ def home():
 def beginSearch():
   nodes=request.values.get('nodeArray')
   edges=request.values.get('edgeArray')
-  test=type(nodes)
+  test=str(type(nodes))
   return(test)
