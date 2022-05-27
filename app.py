@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-import os 
+import os
+import json
 
 class drone:
   def __init__(self,name, charge,coord):
@@ -20,7 +21,7 @@ def home():
 
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
-  nodes=request.values.get('nodeArray')
-  edges=request.values.get('edgeArray')
-  test=str(type(nodes))
+  data_received = json.loads(request.data)
+  
+  test=data_received['nodeArray']
   return(test)
