@@ -193,12 +193,12 @@
 				}
 				$edgeArray.push(tempArray);	
 			}
-			console.log($edgeArray);
-			console.log($nodeArray);
+			console.log(typeof($edgeArray));
+			console.log(typeof($nodeArray));
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edgeArray":$edgeArray,"nodeArray":$nodeArray, "test":"test"},
+			data: {"edgeArray":$edgeArray,"nodeArray":$nodeArray},
 			})
 			.done(function(msg){
 				alert(msg);
