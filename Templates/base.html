@@ -163,8 +163,8 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			nodeArray=[]
-			edgeArray=[]
+			$nodeArray=[]
+			$edgeArray=[]
 			for(let i=0; i<nodes.length;i++){
 				temp=JSON.stringify(nodes[i]);
 				temp=(temp.replace("{","")).replace("}","");
@@ -177,7 +177,7 @@
 					tempArray[j]=tempArray[j].replace('"','');
 					tempArray[j]=tempArray[j].split(":")[1];
 				}
-				nodeArray.push(tempArray);	
+				$nodeArray.push(tempArray);	
 			}
 			for(let i=0; i<edges.length;i++){
 				temp=JSON.stringify(edges[i]);
@@ -191,15 +191,15 @@
 					tempArray[j]=tempArray[j].replace('"','');
 					tempArray[j]=tempArray[j].split(":")[1];
 				}
-				edgeArray.push(tempArray);	
+				$edgeArray.push(tempArray);	
 			}
-			console.log(edgeArray);
-			console.log(nodeArray);
-			/*$.ajax({
+			console.log($edgeArray);
+			console.log($nodeArray);
+			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {},
-			})*/	
+			data: {"edgeArray":$edgeArray,"nodeArray":$nodeArray},
+			})	
    		})
     });
 
