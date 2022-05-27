@@ -174,7 +174,7 @@
 						tempArray[j]=tempArray[j].replaceAll('r','');
 						tempArray[j]=tempArray[j].replaceAll('\\','');
 					}
-					tempArray[j]=tempArray[j].replace('"','');
+					tempArray[j]=tempArray[j].replaceAll('"','');
 					tempArray[j]=tempArray[j].split(":")[1];
 				}
 				$nodeArray.push(tempArray);	
