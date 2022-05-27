@@ -20,7 +20,7 @@ def home():
 
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
-  nodes=request.values.get('nodeArray')
+  nodes=request.values.get('test')
   edges=request.values.get('edgeArray')
   
-  return(len(nodes))
+  return(nodes)
