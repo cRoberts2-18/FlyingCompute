@@ -128,7 +128,7 @@
                 reader.onload = function (e) {
                     const text = e.target.result;
         	    const data = csvToArray(text);
-		    console.log(data)
+		    alert(data[0])
                 };
                 reader.readAsText(input.files[0]);
             }
