@@ -165,11 +165,11 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			console.log(JSON.stringify(nodeArray))
+			console.log(JSON.stringify(nodes))
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodeArray)},
+			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
 			})
 			.done(function(msg){
 				alert(msg);
