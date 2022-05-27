@@ -31,7 +31,7 @@ def beginSearch():
     tempArray=[]
     tempArray.append(nodes[i]['id'])
     tempArray.append(nodes[i]['X'])
-    tempArray.append(nodes[i]['Y'])
+    tempArray.append(nodes[i]['Y\r'])
     nodeArray.append(tempArray)
   for i in range(0,len(edges)):
     tempArray=[]
@@ -40,6 +40,6 @@ def beginSearch():
     tempArray.append(nodes[i]['trail'])
     tempArray.append(nodes[i]['distance'])
     tempArray.append(nodes[i]['color'])
-    tempArray.append(nodes[i]['estimate'])
+    tempArray.append(nodes[i]['estimate\r'])
     edgeArray.append(tempArray)
   return(key)
