@@ -165,15 +165,16 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			console.log(JSON.stringify(edges))
-			$.ajax({
-    			method: "POST",
-      			url: "{{ url_for('beginSearch')}}",
-			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
-			})
-			.done(function(msg){
-				document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
-			})
+			if(document.getElementById("Submit").value=="Begin Search"){
+				$.ajax({
+				method: "POST",
+				url: "{{ url_for('beginSearch')}}",
+				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
+				})
+				.done(function(msg){
+					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
+				})
+			}
    		})
     });
 
