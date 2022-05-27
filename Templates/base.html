@@ -165,6 +165,7 @@
     }
     $(function() {
 		$("#Submit").click(function () {
+			console.log(JSON.stringify(nodeArray))
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
