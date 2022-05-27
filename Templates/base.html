@@ -198,7 +198,7 @@
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edgeArray":$edgeArray,"nodeArray":$nodeArray},
+			data: JSON.stringify({"edgeArray":$edgeArray,"nodeArray":$nodeArray}),
 			})
 			.done(function(msg){
 				alert(msg);
