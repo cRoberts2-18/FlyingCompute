@@ -22,4 +22,6 @@ def home():
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
   nodes=request.values.get("nodes")
-  return(nodes)
+  test=json.loads(nodes)
+  
+  return(test[0])
