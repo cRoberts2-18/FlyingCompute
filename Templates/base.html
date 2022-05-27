@@ -109,7 +109,7 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			var $nodes = $.csv.toArrays($("Nodes").prop('files'));
+			var $nodes = $("Nodes").value;
 			alert($nodes);
 			/*$.ajax({
     			method: "POST",
