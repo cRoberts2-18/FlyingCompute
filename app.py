@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+import random
 import json
 
 class drone:
@@ -21,8 +22,24 @@ def home():
 
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
+  key=random.randint(1000000,9999999)
+  nodeArray=[]
+  edgeArray=[]
   nodes=json.loads(request.values.get("nodes"))
   edges=json.loads(request.values.get("edges"))
-  
-  
-  return(edges[0])
+  for i in range(0,len(nodes)):
+    tempArray=[]
+    tempArray.append(nodes[i]['id'])
+    tempArray.append(nodes[i]['X'])
+    tempArray.append(nodes[i]['Y'])
+    nodeArray.append(tempArray)
+  for i in range(0,len(edges)):
+    tempArray=[]
+    tempArray.append(nodes[i]['node1'])
+    tempArray.append(nodes[i]['node2'])
+    tempArray.append(nodes[i]['trail'])
+    tempArray.append(nodes[i]['distance'])
+    tempArray.append(nodes[i]['color'])
+    tempArray.append(nodes[i]['estimate'])
+    edgeArray.append(tempArray)
+  return(key)
