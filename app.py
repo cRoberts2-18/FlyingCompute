@@ -43,5 +43,5 @@ def beginSearch():
     tempArray.append(edges[i]['estimate\r'])
     edgeArray.append(tempArray)
   for i in range(0,len(nodeArray)):
-    nodeArray[i][len(nodeArray[i]-1)]=nodeArray[i][len(nodeArray[i]-1)].replace("\r","")
+    nodeArray[i][len(nodeArray[i])-1]=nodeArray[i][len(nodeArray[i])-1].replace("\r","")
   return({"nodes":nodeArray,"edges":edgeArray})
