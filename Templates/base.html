@@ -198,7 +198,7 @@
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edges":edgeArray,"nodes":"youre a fat ugly cunt"},
+			data: {"edges":edgeArray,"nodes":nodeArray},
 			})
 			.done(function(msg){
 				alert(msg);
