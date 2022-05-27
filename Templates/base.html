@@ -169,7 +169,12 @@
 				temp=JSON.stringify(nodes[i]);
 				temp=(temp.replace("{","")).replace("}","");
 				tempArray=temp.split(",");
+				for(let j=0; j<tempArray.length; j++){
+					tempArray[j]=tempArray[j].replace('"','');
+					tempArray[j]=tempArray[j].split(":")[1];
+				}
 				console.log(tempArray);
+				
 			
 			}
 			/*$.ajax({
