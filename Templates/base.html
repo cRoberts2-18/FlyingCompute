@@ -165,40 +165,10 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			for(let i=0; i<nodes.length;i++){
-				temp=JSON.stringify(nodes[i]);
-				temp=(temp.replace("{","")).replace("}","");
-				tempArray=temp.split(",");
-				for(let j=0; j<tempArray.length; j++){
-					if(j==tempArray.length-1){
-						tempArray[j]=tempArray[j].replaceAll('r','');
-						tempArray[j]=tempArray[j].replaceAll('\\','');
-					}
-					tempArray[j]=tempArray[j].replaceAll('"','');
-					tempArray[j]=tempArray[j].split(":")[1];
-				}
-				nodeArray.push(tempArray);	
-			}
-			for(let i=0; i<edges.length;i++){
-				temp=JSON.stringify(edges[i]);
-				temp=(temp.replace("{","")).replace("}","");
-				tempArray=temp.split(",");
-				for(let j=0; j<tempArray.length; j++){
-					if(j==tempArray.length-1){
-						tempArray[j]=tempArray[j].replaceAll('r','');
-						tempArray[j]=tempArray[j].replaceAll('\\','');
-					}
-					tempArray[j]=tempArray[j].replaceAll('"','');
-					tempArray[j]=tempArray[j].split(":")[1];
-				}
-				edgeArray.push(tempArray);	
-			}
-			console.log(edgeArray);
-			console.log(nodeArray);
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edges":edgeArray,"nodes":nodeArray[0][0]},
+			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodeArray)},
 			})
 			.done(function(msg){
 				alert(msg);
