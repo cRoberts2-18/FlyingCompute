@@ -109,7 +109,7 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			var $nodes = $("Nodes");
+			var $nodes = $("Nodes").prop('files');
 			alert($nodes);
 			/*$.ajax({
     			method: "POST",
