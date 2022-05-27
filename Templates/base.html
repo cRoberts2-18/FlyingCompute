@@ -172,7 +172,7 @@
 			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
 			})
 			.done(function(msg){
-				console.log(msg);
+				document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
 			})
    		})
     });
