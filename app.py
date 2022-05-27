@@ -42,4 +42,4 @@ def beginSearch():
     tempArray.append(edges[i]['color'])
     tempArray.append(edges[i]['estimate\r'])
     edgeArray.append(tempArray)
-  return(str(key))
+  return({"nodes":nodeArray,"edges":edgeArray})
