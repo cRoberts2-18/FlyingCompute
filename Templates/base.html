@@ -36,7 +36,7 @@
   <label for="location">Last known location:</label><br>
   <input type="text" id="location" placeholder="Last know location (click map)" name="location" readonly><br>
   <label for="img">Trail List:</label><br>
-  <input style="float:center"type="file" id="Edges" name="Edges"><br>
+  <input style="float:center"type="file" id="Edges" name="Edges" onchange="readEdges(this);"><br>
   <label for="img">Crossing List:</label><br>
   <input style="float:center"type="file" id="Nodes" name="Nodes"  onchange="readNodes(this);"><br>
   <label for="img">Target image:</label><br>
@@ -128,7 +128,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     const text = e.target.result;
-        	    nodes = csvToArray(text);
+        	    nodes = JSON.stringify(csvToArray(text));
                 };
                 reader.readAsText(input.files[0]);
             }
@@ -139,7 +139,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     const text = e.target.result;
-        	    edges = csvToArray(text);
+        	    edges = JSON.stringify(csvToArray(text));
                 };
                 reader.readAsText(input.files[0]);
             }
@@ -163,8 +163,8 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			//var $nodes = $.csv.toArrays(nodes);
-			//alert($nodes);
+			alert("nodes: "+nodes);
+			alerts("edges: "+edges)
 			/*$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
