@@ -22,4 +22,4 @@ def home():
 def beginSearch():
   nodes=request.values.get("nodeArray")
   edges=request.values.get("edgeArray")
-  return("".join(str(x) for x in nodes))
+  return(nodes[0][0])
