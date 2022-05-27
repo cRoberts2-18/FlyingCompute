@@ -61,6 +61,7 @@
 </div>
   
 <script>
+     var runsearch=0;
      var nodes;
      var edges;
      var nodeArray=[]
@@ -156,6 +157,7 @@
       document.getElementById("body").innerHTML="<tr><td>Name: "+name+" Age: "+age+"</td></tr>";
       document.getElementById("Submit").value="Target Found";
       document.getElementById("Submit").onclick=Finish;
+      runsearch=1;
 
     }
 
@@ -163,10 +165,11 @@
       document.getElementById("body").innerHTML+="<tr><td>Target found successfully</td></tr>";
       document.getElementById("Submit").value="Begin Search"	    
       document.getElementById("Submit").onclick=Start;
+      runsearch=0;
     }
     $(function() {
 		$("#Submit").click(function () {
-			if(document.getElementById("Submit").value=="Begin Search"){
+			if(runsearch==1){
 				$.ajax({
 				method: "POST",
 				url: "{{ url_for('beginSearch')}}",
