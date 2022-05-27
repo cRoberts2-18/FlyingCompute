@@ -22,6 +22,4 @@ def home():
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
   nodes=request.values.get("nodeArray")
-  
-  test=data_received['nodeArray']
-  return(test)
+  return(nodes)
