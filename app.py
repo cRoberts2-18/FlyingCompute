@@ -1,6 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os 
 
+class drone:
+  def __init__(self,name, charge,coord):
+    self.name=name
+    self.charge=charge
+    self.coord=coord
+    
+
 
 #intial setup for the flask system
 app= Flask(__name__, template_folder='Templates')
@@ -10,3 +17,7 @@ app.secret_key="flyboy"
 @app.route('/')
 def home():
   return render_template('base.html')
+
+@app.route('/BeginSearch/', methods = ['GET', 'POST'])
+def beginSearch():
+  return("SUUUU")
