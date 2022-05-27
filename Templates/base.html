@@ -169,7 +169,7 @@
 			$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
-			data: {"edges":JSON.stringify(edges),"nodes":nodes},
+			data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
 			})
 			.done(function(msg){
 				alert(msg);
