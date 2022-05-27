@@ -128,7 +128,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     const text = e.target.result;
-        	    nodes = JSON.stringify(csvToArray(text));
+        	    nodes = csvToArray(text);
                 };
                 reader.readAsText(input.files[0]);
             }
@@ -139,7 +139,7 @@
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     const text = e.target.result;
-        	    edges = JSON.stringify(csvToArray(text));
+        	    edges = csvToArray(text);
                 };
                 reader.readAsText(input.files[0]);
             }
@@ -163,8 +163,15 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			alert("nodes: "+nodes);
-			alert("edges: "+edges)
+			nodeArray=[]
+			edgeArray=[]
+			for(let i=0; i<nodes.length;i++){
+				temp=JSON.stringify(nodes[i]);
+				temp=(temp.replace("{","")).replace("}","");
+				tempArray=temp.split(",");
+				console.log(tempArray);
+			
+			}
 			/*$.ajax({
     			method: "POST",
       			url: "{{ url_for('beginSearch')}}",
