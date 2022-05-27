@@ -63,6 +63,8 @@
 <script>
      var nodes;
      var edges;
+     var nodeArray=[]
+     var edgeArray=[]	
      //attribute setup for the leaflet map
      var map = L.map('map',{
         center: [52.770775, -1.2043467],
@@ -163,8 +165,6 @@
     }
     $(function() {
 		$("#Submit").click(function () {
-			nodeArray=[]
-			edgeArray=[]
 			for(let i=0; i<nodes.length;i++){
 				temp=JSON.stringify(nodes[i]);
 				temp=(temp.replace("{","")).replace("}","");
