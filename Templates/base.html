@@ -157,10 +157,11 @@
     $(function() {
 		$("#Submit").click(function () {
 			if(runsearch==1){
+				var teams = document.getElementById("Teams").value
 				$.ajax({
 				method: "POST",
 				url: "{{ url_for('beginSearch')}}",
-				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes)},
+				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes), "teams":teams},
 				})
 				.done(function(msg){
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
