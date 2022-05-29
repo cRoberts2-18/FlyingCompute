@@ -64,8 +64,9 @@
      var runsearch=0;
      var nodes;
      var edges;
-     var nodeArray=[]
-     var edgeArray=[]	
+     var nodeArray=[];
+     var edgeArray=[];
+     var key;
      //attribute setup for the leaflet map
      var map = L.map('map',{
         center: [52.770775, -1.2043467],
@@ -165,6 +166,17 @@
 				})
 				.done(function(msg){
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
+					key=msg;
+				})
+			}
+			else{
+				$.ajax({
+				method: "POST",
+				url: "{{ url_for('endSearch')}}",
+				data: {"key":key},
+				})
+				.done(function(msg){
+					
 				})
 			}
    		})
