@@ -50,8 +50,8 @@ def beginSearch():
   path = os.path.join(dir, str(key))
   os.mkdir(path)
   return(str(key))
-@app.route('/BeginSearch/', methods = ['GET', 'POST'])
-def beginSearch():
+@app.route('/endSearch/', methods = ['GET', 'POST'])
+def endSearch():
   key=request.values.get("key")
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
