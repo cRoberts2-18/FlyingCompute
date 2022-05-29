@@ -46,4 +46,7 @@ def beginSearch():
     nodeArray[i][len(nodeArray[i])-1]=nodeArray[i][len(nodeArray[i])-1].replace("\r","")
   for i in range(0,len(edgeArray)):
     edgeArray[i][len(edgeArray[i])-1]=edgeArray[i][len(edgeArray[i])-1].replace("\r","")
+  dir=("/home/ubuntu/search")
+  path = os.path.join(dir, str(key))
+  os.mkdir(path)
   return(str(key))
