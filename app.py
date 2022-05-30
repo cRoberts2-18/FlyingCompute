@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+import csv
 import random
 import json
 
 class drone:
-  def __init__(self,name, charge,coord):
-    self.name=name
+  def __init__(self,sID,charge,coord):
     self.sID=sID
     self.charge=charge
     self.coord=coord
@@ -52,7 +52,17 @@ def beginSearch():
   path = os.path.join(dir, str(key))
   os.mkdir(path)
   
+  drone1=drone(key,100,[250,250])
+  drone2=drone(key,100,[250,750])
+  drone3=drone(key,100,[750,750])
+  drone4=drone(key,100,[750,250])
   
+  with open(path+'/edges.csv', 'wb') as csvfile:
+    filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    filewriter.writerow(['node1', 'node2','trail','distance','color','estimate'])
+    for i in range(0,len(edgeArray)):
+      filewriter.writerow(edgeArray[i][0], edgeArray[i][1],edgeArray[i][2],edgeArray[i][3],edgeArray[i][4],edgeArray[i][5]])
+    
   
   return(str(key))
 
