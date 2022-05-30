@@ -114,8 +114,13 @@ def connectSearch():
   if isPath==True:
     pathList=os.path.join(path,"path.txt")
     f = open(pathList, "r")
+    pathDict={}
     for x in f:
       pathArr.append(x.replace("[","").replace("]","").replace(" ","").replace("\n","").replace("'","").replace("),(","!").replace("(","").replace(")",""))
-         
-    
-  return(str(pathArr))
+    for i in range(0,len(pathArr)):
+      tempArr=pathArr[i].split("!")
+      tupleArr=[]
+      for j in range(0,len(tempArr)):
+          tupleArr.append(tempArr.split(","))
+      pathdict[i]=tupleArr
+  return(pathDict)
