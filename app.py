@@ -66,7 +66,7 @@ def beginSearch():
   nodes.to_csv(nodeLocation)
   
   
-  return(str(key))
+  return(str(drone1.charge))
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
