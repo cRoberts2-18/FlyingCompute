@@ -165,8 +165,9 @@
 				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes), "teams":teams},
 				})
 				.done(function(msg){
-					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg+"</td></tr>";
-					key=msg;
+					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg['key']+"</td></tr>";
+					document.getElementById("body").innerHTML+="<tr><td>Team pathings: "+msg['pathing']+"</td></tr>";
+					key=msg['key'];
 				})
 			}
 			else{
