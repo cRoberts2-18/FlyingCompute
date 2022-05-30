@@ -8,7 +8,7 @@ import shutil
 import MultiPath
 
 class drone:
-  def __init__(self,sID,charge,coord):
+  def __init__(self,sID,charge,coord,path,teams):
     self.sID=sID
     self.charge=charge
     self.coord=coord
@@ -20,10 +20,10 @@ class drone:
     pathings=MultiPath.pathCompute(int(teams),nodes,edges)
     return(str(pathings))
     
-drone1=drone(0,100,[250,250])
-drone2=drone(0,100,[250,750])
-drone3=drone(0,100,[750,750])
-drone4=drone(0,100,[750,250])
+drone1=drone(0,100,[250,250],"","")
+drone2=drone(0,100,[250,750],"","")
+drone3=drone(0,100,[750,750],"","")
+drone4=drone(0,100,[750,250],"","")
   
 
     
@@ -82,8 +82,16 @@ def beginSearch():
   drone2.sID=key
   drone3.sID=key
   drone4.sID=key
-  test=drone1.pathcompute(teams)
-  return(test)
+  drone1.teams=teams
+  drone2.teams=teams
+  drone3.teams=teams
+  drone4.teams=teams
+  pathing=drone1.pathcompute(teams)
+  drone1.path=pathing
+  drone2.path=pathing
+  drone3.path=pathing
+  drone4.path=pathing
+  return({"key":key,"path":pathing})
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
@@ -92,6 +100,14 @@ def endSearch():
   drone2.sID=0
   drone3.sID=0
   drone4.sID=0
+  drone1.teams=""
+  drone2.teams=""
+  drone3.teams=""
+  drone4.teams=""
+  drone1.path=""
+  drone2.path=""
+  drone3.path=""
+  drone4.path=""
   key=request.values.get("key")
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
