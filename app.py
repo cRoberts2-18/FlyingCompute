@@ -25,7 +25,7 @@ drone1=drone(0,100,[250,250],"","")
 drone2=drone(0,100,[250,750],"","")
 drone3=drone(0,100,[750,750],"","")
 drone4=drone(0,100,[750,250],"","")
-  
+Gkey=0  
 
     
 #intial setup for the flask system
@@ -79,6 +79,7 @@ def beginSearch():
   nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
   nodes.to_csv(nodeLocation)
   
+  Gkey=key
   drone1.sID=key
   drone2.sID=key
   drone3.sID=key
@@ -117,7 +118,7 @@ def endSearch():
 @app.route('/connectSearch/', methods = ['GET','POST'])
 def connectSearch():
   key = request.values.get('key')
-  if int(key)==drone1.sID:
+  if int(key)==Gkey:
     path=drone1.path
   else:
     path="False"
