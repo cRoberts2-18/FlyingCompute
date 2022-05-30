@@ -117,10 +117,8 @@ def endSearch():
 @app.route('/connectSearch/', methods = ['GET','POST'])
 def connectSearch():
   key = request.values.get('key')
-  dir=("/home/ubuntu/search")
-  path = os.path.join(dir, str(key))
-  edgeLocation=os.path.join(path,"edgelist.csv")
-  nodeLocation=os.path.join(path,"nodelist.csv")
-  test = pd.read_csv(edgeLocation)
-  
-  return(test.to_string())
+  if key==str(drone1.sID):
+    path=drone1.path
+  else
+    path=False
+  return(path)
