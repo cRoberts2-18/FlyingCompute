@@ -167,6 +167,7 @@
 				.done(function(msg){
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg['key']+"</td></tr>";
 					document.getElementById("body").innerHTML+="<tr><td>Team pathings: "+msg['path']['1']+"</td></tr>";
+					console.log(msg['path'])
 					key=msg['key'];
 				})
 			}
