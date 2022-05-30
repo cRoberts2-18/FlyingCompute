@@ -168,17 +168,8 @@
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg['key']+"</td></tr>";
 					console.log(msg['path']);
 					for(let i=1; i<=Object.keys(msg['path']).length;i++){
-						path=""
-						for(let j=0;j<msg['path'][i].length;j++){
-							if(j==0){
-								//path+=['path'][i][0];
-							}
-							path+=['path'][i][1];
-							if(j<msg['path'][i].length-1){
-								path+=","
-							}
-						}
-						document.getElementById("body").innerHTML+="<tr><td>Team "+i+" pathing: "+path+"</td></tr>";
+						console.log(msg['path'][i].length)
+						document.getElementById("body").innerHTML+="<tr><td>Team "+i+" pathing: "+msg['path'][i]+"</td></tr>";
 					}
 					key=msg['key'];
 				})
