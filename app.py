@@ -53,17 +53,17 @@ def beginSearch():
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
   os.mkdir(path)
-  
-  drone1=drone(key,100,[250,250])
-  drone2=drone(key,100,[250,750])
-  drone3=drone(key,100,[750,750])
-  drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
   nodeLocation=os.path.join(path,"nodelist.csv")
   edges = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
   edges.to_csv(edgeLocation)
-  nodes = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
-  nodes.to_csv(edgeLocation)
+  nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
+  nodes.to_csv(nodeLocation)
+  
+  drone1 = drone(key,100,[250,250])
+  drone2=drone(key,100,[250,750])
+  drone3=drone(key,100,[750,750])
+  drone4=drone(key,100,[750,250])
   
   return(str(key))
 
