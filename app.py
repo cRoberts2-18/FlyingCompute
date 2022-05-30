@@ -106,7 +106,15 @@ def endSearch():
 @app.route('/connectSearch/', methods = ['GET','POST'])
 def connectSearch():
   key = request.values.get('key')
+  pathArr=[]
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
   isPath=os.path.isdir(path)
-  return(key)
+  
+  if isPath==True:
+    pathList=os.path.join(path,"path.txt")
+    f = open(pathList, "r")
+    for x in f:
+      pathArr.append(x)
+    
+  return(str(pathArr))
