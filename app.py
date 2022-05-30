@@ -8,7 +8,7 @@ import shutil
 import MultiPath
 
 class drone:
-  def __init__(self,sID,charge,coord,path,teams):
+  def __init__(self,sID,charge,coord,path):
     self.sID=sID
     self.charge=charge
     self.coord=coord
@@ -21,11 +21,11 @@ class drone:
     self.charge-=10;
     return(pathings)
     
-drone1=drone(0,100,[250,250],"","")
-drone2=drone(0,100,[250,750],"","")
-drone3=drone(0,100,[750,750],"","")
-drone4=drone(0,100,[750,250],"","")
-Gkey=0  
+drone1=drone(0,100,[250,250],"")
+drone2=drone(0,100,[250,750],"")
+drone3=drone(0,100,[750,750],"")
+drone4=drone(0,100,[750,250],"")
+
 
     
 #intial setup for the flask system
@@ -79,20 +79,16 @@ def beginSearch():
   nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
   nodes.to_csv(nodeLocation)
   
-  Gkey=key
   drone1.sID=key
   drone2.sID=key
   drone3.sID=key
   drone4.sID=key
-  drone1.teams=teams
-  drone2.teams=teams
-  drone3.teams=teams
-  drone4.teams=teams
   pathing=drone1.pathcompute(teams)
-  drone1.path=pathing
-  drone2.path=pathing
-  drone3.path=pathing
-  drone4.path=pathing
+  pathList=os.path.join(path,"path.txt")
+  f=open(pathList,"w")
+  for i in range(1,len(pathing)+1):
+    f.write(str(pathing[i])+"\n")
+  f.close()
   return({"key":key,"path":pathing})
 
 
@@ -102,14 +98,6 @@ def endSearch():
   drone2.sID=0
   drone3.sID=0
   drone4.sID=0
-  drone1.teams=""
-  drone2.teams=""
-  drone3.teams=""
-  drone4.teams=""
-  drone1.path=""
-  drone2.path=""
-  drone3.path=""
-  drone4.path=""
   key=request.values.get("key")
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
@@ -118,8 +106,7 @@ def endSearch():
 @app.route('/connectSearch/', methods = ['GET','POST'])
 def connectSearch():
   key = request.values.get('key')
-  if int(key)==Gkey:
-    path=drone1.path
-  else:
-    path="False"
-  return(str(Gkey))
+  dir=("/home/ubuntu/search")
+  path = os.path.join(dir, str(key))
+  isPath=os.path.isdir(path)
+  return(key)
