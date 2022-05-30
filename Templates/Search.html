@@ -36,8 +36,11 @@
 <form class="form">
 	<input class="buttonstyle" type=button id = "Path" onclick="path()" value = "Path">
 	<input class="buttonstyle" type=button id = "Update" onclick="update()" value = "Update"><br><br>
-	path
-</form class="form">
+</form>
+<table id="pathing" class="changeTable">
+    <thead><tr><td>trail</td><td>Searched</td></tr></thead>
+    <tbody id="body"></tbody>
+  </table>
 </div>
 <div id="update" style="display:none">
 <form class="form">
@@ -61,6 +64,10 @@
 						alert("invalid connection key")
 					}
 					else{
+						len=Object.keys(msg).length;
+						for(let i=0;i<len;i++){
+							document.getElementById("body").innerHTML+="<tr><td>"+msg[i]+"</td></tr>";
+						}
 						console.log(msg)
 						document.getElementById("form").style.display="none"
 						document.getElementById("path").style.display="block"
