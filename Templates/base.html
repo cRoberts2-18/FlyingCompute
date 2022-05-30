@@ -166,7 +166,7 @@
 				})
 				.done(function(msg){
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg['key']+"</td></tr>";
-					document.getElementById("body").innerHTML+="<tr><td>Team pathings: "+msg['path']+"</td></tr>";
+					document.getElementById("body").innerHTML+="<tr><td>Team pathings: "+msg['path']['1']+"</td></tr>";
 					key=msg['key'];
 				})
 			}
