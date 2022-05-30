@@ -53,10 +53,10 @@ def beginSearch():
   path = os.path.join(dir, str(key))
   os.mkdir(path)
   
-  global drone1=drone(key,100,[250,250])
-  global drone2=drone(key,100,[250,750])
-  global drone3=drone(key,100,[750,750])
-  global drone4=drone(key,100,[750,250])
+  drone1=drone(key,100,[250,250])
+  drone2=drone(key,100,[250,750])
+  drone3=drone(key,100,[750,750])
+  drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
   
   return(edgeLocation)
