@@ -65,8 +65,12 @@ def beginSearch():
   nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
   nodes.to_csv(nodeLocation)
   
+  drone1.sID=key
+  drone2.sID=key
+  drone3.sID=key
+  drone4.sID=key
   
-  return(str(drone1.charge))
+  return(str(drone4.key))
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
