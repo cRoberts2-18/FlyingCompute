@@ -26,12 +26,26 @@
 </header>
 
 <body>
-
-<form class="form">Please enter your connection key:<br><br>
-<input type="text" id="key" name="key" placeholder="Connection Key" class = "box"><br><br>
-<input class="buttonstyle" type=button id = "Submit" value = "Submit">
-
-
+<div id="form">
+	<form class="form">Please enter your connection key:<br><br>
+		<input type="text" id="key" name="key" placeholder="Connection Key" class = "box"><br><br>
+		<input class="buttonstyle" type=button id = "Submit" value = "Submit">
+	</form>
+</div>
+<div id="path" style="display:none">
+<form>
+	<input class="buttonstyle" type=button id = "Path" onclick="path()" value = "Path">
+	<input class="buttonstyle" type=button id = "Update" onclick="update()" value = "Update"><br><br>
+	path
+</form>
+</div>
+<div id="update" style="display:none">
+<form>
+	<input class="buttonstyle" type=button id = "Path" onclick="path()" value = "Path">
+	<input class="buttonstyle" type=button id = "Update" onclick="update()" value = "Update"><br><br>
+	Update
+</form>
+</div>
   
 <script>
  $(function() {
@@ -43,11 +57,26 @@
 				data: {"key":key},
 				})
 				.done(function(msg){
-					alert(msg);
+					if(msg=="False"){
+						alert("invalid connection key")
+					}
+					else{
+						document.getElementById("form").style.display="none"
+						document.getElementById("path").style.display="block"
+						
+					
+					}
 				})
 			})
     });   
-
+function update(){
+	document.getElementById("path").style.display="none"
+	document.getElementById("update").style.display="block"
+}
+function path(){
+	document.getElementById("path").style.display="block"
+	document.getElementById("update").style.display="none"
+}
 </script>
 </body>
 </html>
