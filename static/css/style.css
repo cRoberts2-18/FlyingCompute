@@ -160,7 +160,8 @@
     }
     .buttonstyle{
         padding: 5px 15px;
-        border: 2px solid black;
+        border: 2px solid;
+        border-color: black;
     }
     .labels{
         font-size: 20px;
