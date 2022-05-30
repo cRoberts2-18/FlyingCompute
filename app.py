@@ -122,5 +122,5 @@ def connectSearch():
       tupleArr=[]
       for j in range(0,len(tempArr)):
           tupleArr.append(tempArr[j].split(","))
-      pathdict[i]=tupleArr
+      pathDict[i]=tupleArr
   return(pathDict)
