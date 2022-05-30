@@ -4,6 +4,7 @@ import pandas as pd
 import csv
 import random
 import json
+import shutil
 
 class drone:
   def __init__(self,sID,charge,coord):
@@ -58,8 +59,12 @@ def beginSearch():
   drone3=drone(key,100,[750,750])
   drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
+  nodeLocation=os.path.join(path,"nodelist.csv")
   edges = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
   edges.to_csv(edgeLocation)
+  nodes = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
+  nodes.to_csv(edgeLocation)
+  
   return(str(key))
 
 
@@ -68,5 +73,5 @@ def endSearch():
   key=request.values.get("key")
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
-  os.rmdir(path)
+  shutil.rmtree(path)
   return("")
