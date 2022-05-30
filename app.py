@@ -60,7 +60,7 @@ def beginSearch():
   edgeLocation=os.path.join(path,"edgelist.csv")
   edges = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
   edges.to_csv(edgeLocation)
-  return(key)
+  return(str(key))
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
