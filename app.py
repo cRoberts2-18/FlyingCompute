@@ -88,3 +88,13 @@ def endSearch():
   path = os.path.join(dir, str(key))
   shutil.rmtree(path)
   return("")
+@app.route('/connectSearch/', methods = ['GET','POST'])
+def connectSearch():
+  key = request.values.get('key')
+  dir=("/home/ubuntu/search")
+  path = os.path.join(dir, str(key))
+  edgeLocation=os.path.join(path,"edgelist.csv")
+  nodeLocation=os.path.join(path,"nodelist.csv")
+  test = pd.read_csv(nodeLocation)
+  
+  return(test.to_string())
