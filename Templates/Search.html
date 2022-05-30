@@ -12,7 +12,8 @@
 <header id="header">
 <h2 class="right">Search Team View<h2>
 <div class="navbar">
-  <a href=#><optionL>Home</optionL></a>
+  <a id="pathButton" href=# onclick="path()" style="display:hidden;"><optionL>Path</optionL></a>
+  <a id="updateButton" href=# onclick="update()" style="display:hidden;"><optionL>Update</optionL></a>	
   <div class="dropdown" style="float: right;">
     <button class="dropbtn"> Settings
       <i class="fa fa-caret-down"></i>
@@ -69,8 +70,10 @@
 							document.getElementById("body").innerHTML+="<tr><td>"+msg[0][i]+"</td></tr>";
 						}
 						console.log(msg)
-						document.getElementById("form").style.display="none"
-						document.getElementById("path").style.display="block"
+						document.getElementById("form").style.display="none";
+						document.getElementById("path").style.display="block";
+						document.getElementById("updateButton").style.display="block";
+						document.getElementById("pathButton").style.display="block";
 						
 					
 					}
@@ -78,12 +81,14 @@
 			})
     });   
 function update(){
-	document.getElementById("path").style.display="none"
-	document.getElementById("update").style.display="block"
+	document.getElementById("path").style.display="none";
+	document.getElementById("update").style.display="block";
+	return false;
 }
 function path(){
-	document.getElementById("path").style.display="block"
-	document.getElementById("update").style.display="none"
+	document.getElementById("path").style.display="block";
+	document.getElementById("update").style.display="none";
+	return false;
 }
 </script>
 </body>
