@@ -12,8 +12,13 @@ class drone:
     self.charge=charge
     self.coord=coord
     
+drone1=drone(0,100,[250,250])
+drone2=drone(0,100,[250,750])
+drone3=drone(0,100,[750,750])
+drone4=drone(0,100,[750,250])
+  
 
-
+    
 #intial setup for the flask system
 app= Flask(__name__, template_folder='Templates')
 app.secret_key="flyboy"
@@ -60,10 +65,6 @@ def beginSearch():
   nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
   nodes.to_csv(nodeLocation)
   
-  global drone1 = drone(key,100,[250,250])
-  drone2=drone(key,100,[250,750])
-  drone3=drone(key,100,[750,750])
-  drone4=drone(key,100,[750,250])
   
   return(str(key))
 
