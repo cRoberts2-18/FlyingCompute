@@ -127,10 +127,10 @@
         color: black;
         text-align: center;
         font-size: 40px;
-        top: 10%;
-        left      : 50%;
-        position  : absolute;
-        transform : translate(-50%, -50%);
+        top: 25%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
     }
     
     .form a{
