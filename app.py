@@ -5,7 +5,7 @@ import csv
 import random
 import json
 import shutil
-import multipath
+import MultiPath
 
 class drone:
   def __init__(self,sID,charge,coord):
@@ -17,7 +17,7 @@ class drone:
     path = os.path.join(dir, str(self.sID))
     edges=os.path.join(path,"edgelist.csv")
     nodes=os.path.join(path,"nodelist.csv")
-    pathings=multipath.pathCompute(teams,nodes,edges)
+    pathings=MultiPath.pathCompute(teams,nodes,edges)
     return(str(pathings))
     
 drone1=drone(0,100,[250,250])
