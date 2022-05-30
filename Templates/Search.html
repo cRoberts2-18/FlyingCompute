@@ -65,8 +65,8 @@
 					}
 					else{
 						len=Object.keys(msg).length;
-						for(let i=0;i<len;i++){
-							document.getElementById("body").innerHTML+="<tr><td>"+msg[i]+"</td></tr>";
+						for(let i=0;i<msg[0].length;i++){
+							document.getElementById("body").innerHTML+="<tr><td>"+msg[0][i]+"</td></tr>";
 						}
 						console.log(msg)
 						document.getElementById("form").style.display="none"
