@@ -117,7 +117,7 @@ def endSearch():
 @app.route('/connectSearch/', methods = ['GET','POST'])
 def connectSearch():
   key = request.values.get('key')
-  if key==str(drone1.sID):
+  if key==drone1.sID:
     path=drone1.path
   else:
     path="False"
