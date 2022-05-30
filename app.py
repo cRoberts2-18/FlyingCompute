@@ -59,6 +59,7 @@ def beginSearch():
   global drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
   
+  return(edgeLocation)
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
@@ -67,4 +68,4 @@ def endSearch():
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
   os.rmdir(path)
-  return(edgeLocation)
+  return("")
