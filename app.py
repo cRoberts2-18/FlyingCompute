@@ -115,6 +115,6 @@ def connectSearch():
     pathList=os.path.join(path,"path.txt")
     f = open(pathList, "r")
     for x in f:
-      pathArr.append(x)
+      pathArr.append(x.replace("[","").replace("]","").replace(" ","").replace("\n",""))
     
   return(str(pathArr))
