@@ -122,4 +122,4 @@ def connectSearch():
     path=drone1.path
   else:
     path="False"
-  return(Gkey)
+  return(str(Gkey))
