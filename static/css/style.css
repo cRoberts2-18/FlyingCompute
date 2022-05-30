@@ -127,6 +127,7 @@
         color: black;
         text-align: center;
         font-size: 40px;
+        top: 10%;
         left      : 50%;
         position  : absolute;
         transform : translate(-50%, -50%);
