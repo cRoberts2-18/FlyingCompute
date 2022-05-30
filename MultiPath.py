@@ -2,7 +2,6 @@ import itertools
 import copy
 from multiprocessing import connection
 from posixpath import supports_unicode_filenames
-from turtle import distance
 import networkx as nx
 import pandas as pd
 import matplotlib.pyplot as plt
