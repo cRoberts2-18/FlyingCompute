@@ -6,6 +6,7 @@ import json
 class drone:
   def __init__(self,name, charge,coord):
     self.name=name
+    self.sID=sID
     self.charge=charge
     self.coord=coord
     
@@ -46,10 +47,16 @@ def beginSearch():
     nodeArray[i][len(nodeArray[i])-1]=nodeArray[i][len(nodeArray[i])-1].replace("\r","")
   for i in range(0,len(edgeArray)):
     edgeArray[i][len(edgeArray[i])-1]=edgeArray[i][len(edgeArray[i])-1].replace("\r","")
+  
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
   os.mkdir(path)
+  
+  
+  
   return(str(key))
+
+
 @app.route('/endSearch/', methods = ['GET', 'POST'])
 def endSearch():
   key=request.values.get("key")
