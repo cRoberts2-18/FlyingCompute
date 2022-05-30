@@ -120,5 +120,5 @@ def connectSearch():
   if key==str(drone1.sID):
     path=drone1.path
   else
-    path=False
+    path="False"
   return(path)
