@@ -70,7 +70,7 @@ def beginSearch():
   drone3.sID=key
   drone4.sID=key
   
-  return(str(drone4.key))
+  return(str(drone4.sID))
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
