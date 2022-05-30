@@ -58,8 +58,9 @@ def beginSearch():
   drone3=drone(key,100,[750,750])
   drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
-  
-  return(edgeLocation)
+  edges = pd.DataFrame(edgeArray, columns=['node1', 'node2','trail','distance','color','estimate'])
+  edges.to_csv(edgeLocation)
+  return(key)
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
