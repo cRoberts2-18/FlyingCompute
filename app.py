@@ -28,6 +28,10 @@ app.secret_key="flyboy"
 def home():
   return render_template('base.html')
 
+@app.route('/search/')
+def search():
+  return render_template('Search.html')
+
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
   key=random.randint(1000000,9999999)
@@ -75,6 +79,10 @@ def beginSearch():
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
 def endSearch():
+  drone1.sID=0
+  drone2.sID=0
+  drone3.sID=0
+  drone4.sID=0
   key=request.values.get("key")
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
