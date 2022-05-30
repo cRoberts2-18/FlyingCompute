@@ -56,8 +56,8 @@ def beginSearch():
   drone2=drone(key,100,[250,750])
   drone3=drone(key,100,[750,750])
   drone4=drone(key,100,[750,250])
-  
-  with open(path+'/edges.csv', 'wb') as csvfile:
+  edgeLocation=os.path.join(path,"edgelist.csv")
+  with open(edgeLocation, 'wb') as csvfile:
     filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
     filewriter.writerow(['node1', 'node2','trail','distance','color','estimate'])
     for i in range(0,len(edgeArray)):
