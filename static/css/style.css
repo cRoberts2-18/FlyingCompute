@@ -159,9 +159,9 @@
         width: 300px;
     }
     .buttonstyle{
-        background-color: #e8e8e8;
+        background-color: #ffffff;
         padding: 5px 15px;
-        border: 2px solid;
+        border: 1px solid;
         border-color: black;
     }
     .labels{
