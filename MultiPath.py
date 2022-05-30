@@ -63,10 +63,10 @@ def pathCompute(teams,nodepath,edgepath):
     edges=[]
     nodes=[]
     for i, row in edgelist.iterrows():
-        edges.append([row[0],row[1],0])
+        edges.append([row[1],row[2],0])
 
     for i, row in nodelist.iterrows():
-        nodes.append([row[0],(row[1],row[2])])
+        nodes.append([row[1],(row[2],row[3])])
 
     for i in range(len(nodes)):
         templist=[]
