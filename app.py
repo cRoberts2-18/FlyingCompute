@@ -61,7 +61,7 @@ def beginSearch():
     filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
     filewriter.writerow(['node1', 'node2','trail','distance','color','estimate'])
     for i in range(0,len(edgeArray)):
-      filewriter.writerow(edgeArray[i][0], edgeArray[i][1],edgeArray[i][2],edgeArray[i][3],edgeArray[i][4],edgeArray[i][5])
+      filewriter.writerow([edgeArray[i][0], edgeArray[i][1],edgeArray[i][2],edgeArray[i][3],edgeArray[i][4],edgeArray[i][5]])
     
   
   return(str(key))
