@@ -5,12 +5,20 @@ import csv
 import random
 import json
 import shutil
+import multipath
 
 class drone:
   def __init__(self,sID,charge,coord):
     self.sID=sID
     self.charge=charge
     self.coord=coord
+  def pathcompute(self,teams):
+    dir=("/home/ubuntu/search")
+    path = os.path.join(dir, str(self.sID))
+    edges=os.path.join(path,"edgelist.csv")
+    nodes=os.path.join(path,"nodelist.csv")
+    pathings=multipath.pathCompute(teams,nodes,edges)
+    return(str(pathings))
     
 drone1=drone(0,100,[250,250])
 drone2=drone(0,100,[250,750])
@@ -39,6 +47,7 @@ def beginSearch():
   edgeArray=[]
   nodes=json.loads(request.values.get("nodes"))
   edges=json.loads(request.values.get("edges"))
+  teams=request.values.get("teams")
   for i in range(0,len(nodes)):
     tempArray=[]
     tempArray.append(nodes[i]['id'])
@@ -73,8 +82,8 @@ def beginSearch():
   drone2.sID=key
   drone3.sID=key
   drone4.sID=key
-  
-  return(str(key))
+  test=drone1.pathcompute(teams)
+  return(test)
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
