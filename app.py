@@ -95,6 +95,6 @@ def connectSearch():
   path = os.path.join(dir, str(key))
   edgeLocation=os.path.join(path,"edgelist.csv")
   nodeLocation=os.path.join(path,"nodelist.csv")
-  test = pd.read_csv(nodeLocation)
+  test = pd.read_csv(edgeLocation)
   
   return(test.to_string())
