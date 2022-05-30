@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import os
+import pandas as pd
 import csv
 import random
 import json
@@ -52,19 +53,12 @@ def beginSearch():
   path = os.path.join(dir, str(key))
   os.mkdir(path)
   
-  drone1=drone(key,100,[250,250])
-  drone2=drone(key,100,[250,750])
-  drone3=drone(key,100,[750,750])
-  drone4=drone(key,100,[750,250])
+  global drone1=drone(key,100,[250,250])
+  global drone2=drone(key,100,[250,750])
+  global drone3=drone(key,100,[750,750])
+  global drone4=drone(key,100,[750,250])
   edgeLocation=os.path.join(path,"edgelist.csv")
-  with open(edgeLocation, 'wb') as csvfile:
-    filewriter = csv.writer(csvfile, delimiter=',',quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    filewriter.writerow(['node1', 'node2','trail','distance','color','estimate'])
-    for i in range(0,len(edgeArray)):
-      filewriter.writerow([edgeArray[i][0], edgeArray[i][1],edgeArray[i][2],edgeArray[i][3],edgeArray[i][4],edgeArray[i][5]])
-    
   
-  return(str(key))
 
 
 @app.route('/endSearch/', methods = ['GET', 'POST'])
@@ -73,4 +67,4 @@ def endSearch():
   dir=("/home/ubuntu/search")
   path = os.path.join(dir, str(key))
   os.rmdir(path)
-  return("")
+  return(edgeLocation)
