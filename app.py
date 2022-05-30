@@ -119,6 +119,6 @@ def connectSearch():
   key = request.values.get('key')
   if key==str(drone1.sID):
     path=drone1.path
-  else
+  else:
     path="False"
   return(path)
