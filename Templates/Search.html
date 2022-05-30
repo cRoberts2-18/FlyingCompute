@@ -34,7 +34,19 @@
 
   
 <script>
-    
+ $(function() {
+		$("#Submit").click(function () {
+				var key = document.getElementById("key").value
+				$.ajax({
+				method: "POST",
+				url: "{{ url_for('connectSearch')}}",
+				data: {"key":key},
+				})
+				.done(function(msg){
+					alert(msg);
+				})
+			})
+    });   
 
 </script>
 </body>
