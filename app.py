@@ -18,7 +18,7 @@ class drone:
     edges=os.path.join(path,"edgelist.csv")
     nodes=os.path.join(path,"nodelist.csv")
     pathings=MultiPath.pathCompute(int(teams),nodes,edges)
-    return(str(pathings))
+    return(pathings)
     
 drone1=drone(0,100,[250,250],"","")
 drone2=drone(0,100,[250,750],"","")
