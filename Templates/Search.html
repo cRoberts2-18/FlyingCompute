@@ -90,8 +90,8 @@ function path(){
 function changeTeam(){
 	document.getElementById("body").innerHTML="";
 	index=(document.getElementById("team").value)-1;
-	for(let i=0;i<msg[index].length;i++){
-		document.getElementById("body").innerHTML+="<tr><td>"+msg[index][i]+"</td></tr>";
+	for(let i=0;i<pathDict[index].length;i++){
+		document.getElementById("body").innerHTML+="<tr><td>"+pathDict[index][i]+"</td></tr>";
 	}
 
 }
