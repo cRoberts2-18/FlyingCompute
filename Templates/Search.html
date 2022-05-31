@@ -61,7 +61,8 @@ var pathDict;
 						alert("invalid connection key")
 					}
 					else{
-						document.getElementById("head").innerHTML="<tr><td>Name: "+msg[0][0]+"</td><td>Age: "+msg[0][0]+"</td></tr><tr><td>trail</td><td>Searched</td></tr>"
+						var infoArr=msg[0].split(",")
+						document.getElementById("head").innerHTML="<tr><td>Name: "+infoArr[0]+"</td><td>Age: "+infoArr[0][0]+"</td></tr><tr><td>trail</td><td>Searched</td></tr>"
 						len=Object.keys(msg[1]).length;
 						for(let i=0;i<msg[1][0].length;i++){
 							document.getElementById("body").innerHTML+="<tr><td>"+msg[1][0][i]+"</td></tr>";
