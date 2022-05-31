@@ -34,6 +34,7 @@
 	</form>
 </div>
 <div id="path" style="display:none">
+<input type=number name="team" id="team" min="1" onchange="changeTeam()">
 <table id="pathing" class="changeTable">
     <thead><tr><td>trail</td><td>Searched</td></tr></thead>
     <tbody id="body"></tbody>
@@ -46,6 +47,7 @@
 </div>
   
 <script>
+var pathDict;
  $(function() {
 		$("#Submit").click(function () {
 				var key = document.getElementById("key").value
@@ -63,12 +65,12 @@
 						for(let i=0;i<msg[0].length;i++){
 							document.getElementById("body").innerHTML+="<tr><td>"+msg[0][i]+"</td></tr>";
 						}
-						console.log(msg)
+						pathDict=msg
 						document.getElementById("form").style.display="none";
 						document.getElementById("path").style.display="block";
 						document.getElementById("updateButton").style.display="block";
 						document.getElementById("pathButton").style.display="block";
-						
+						document.getElementById("team").max=len+1;
 					
 					}
 				})
@@ -83,6 +85,14 @@ function path(){
 	document.getElementById("path").style.display="block";
 	document.getElementById("update").style.display="none";
 	return false;
+}
+	
+function changeTeam(){
+	index=(document.getElementById("team").value)-1
+	for(let i=0;i<msg[index].length;i++){
+		document.getElementById("body").innerHTML+="<tr><td>"+msg[index][i]+"</td></tr>";
+	}
+
 }
 </script>
 </body>
