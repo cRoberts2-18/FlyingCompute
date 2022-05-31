@@ -70,7 +70,7 @@ var pathDict;
 						document.getElementById("path").style.display="block";
 						document.getElementById("updateButton").style.display="block";
 						document.getElementById("pathButton").style.display="block";
-						document.getElementById("team").max=len+1;
+						document.getElementById("team").max=len;
 					
 					}
 				})
@@ -88,7 +88,8 @@ function path(){
 }
 	
 function changeTeam(){
-	index=(document.getElementById("team").value)-1
+	document.getElementById("body").innerHTML="";
+	index=(document.getElementById("team").value)-1;
 	for(let i=0;i<msg[index].length;i++){
 		document.getElementById("body").innerHTML+="<tr><td>"+msg[index][i]+"</td></tr>";
 	}
