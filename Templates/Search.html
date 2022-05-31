@@ -93,7 +93,7 @@ function changeTeam(){
 	document.getElementById("body").innerHTML="";
 	index=(document.getElementById("team").value)-1;
 	for(let i=0;i<pathDict[index].length;i++){
-		document.getElementById("body").innerHTML+="<tr><td>"+pathDict[index][i]+"</td></tr>";
+		document.getElementById("body").innerHTML+="<tr><td>"+pathDict[index][i]+"</td><td><input type=checkbox id=\""+pathDict[index][i]+"\"></td></tr>";
 	}
 
 }
