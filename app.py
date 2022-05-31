@@ -137,5 +137,5 @@ def connectSearch():
       pathDict[i]=tupleArr
       returnDict={"0":info,"1":pathDict}
   else:
-    pathDict="False"
+    returnDict="False"
   return(returnDict)
