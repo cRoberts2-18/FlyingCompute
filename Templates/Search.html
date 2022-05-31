@@ -65,7 +65,7 @@ var pathDict;
 						document.getElementById("head").innerHTML="<tr><td>Name: "+infoArr[0]+"</td><td>Age: "+infoArr[1]+"</td></tr><tr><td>trail</td><td>Searched</td></tr>"
 						len=Object.keys(msg[1]).length;
 						for(let i=0;i<msg[1][0].length;i++){
-							document.getElementById("body").innerHTML+="<tr><td>"+msg[1][0][i]+"</td></tr>";
+							document.getElementById("body").innerHTML+="<tr><td>"+msg[1][0][i]+"</td><td><input type=checkbox id=\""+msg[1][0][i]+"\"></td></tr>";
 						}
 						pathDict=msg[1];
 						document.getElementById("form").style.display="none";
