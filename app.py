@@ -119,7 +119,7 @@ def connectSearch():
   isPath=os.path.isdir(path)
   
   if isPath==True:
-    info=[]
+    info=""
     infoList=os.path.join(path,"info.txt")
     f = open(infoList, "r")
     for x in f:
