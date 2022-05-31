@@ -159,10 +159,12 @@
 		$("#Submit").click(function () {
 			if(runsearch==1){
 				var teams = document.getElementById("Teams").value
+				var name = document.getElementById("Name").value
+				var age = document.getElementById("Age").value
 				$.ajax({
 				method: "POST",
 				url: "{{ url_for('beginSearch')}}",
-				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes), "teams":teams},
+				data: {"edges":JSON.stringify(edges),"nodes":JSON.stringify(nodes), "teams":teams,"name":name,"age":age},
 				})
 				.done(function(msg){
 					document.getElementById("body").innerHTML+="<tr><td>Connect Search teams using the key: "+msg['key']+"</td></tr>";
