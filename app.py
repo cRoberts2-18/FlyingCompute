@@ -49,6 +49,8 @@ def beginSearch():
   nodes=json.loads(request.values.get("nodes"))
   edges=json.loads(request.values.get("edges"))
   teams=request.values.get("teams")
+  name=request.values.get("name")
+  age=request.values.get("age")
   for i in range(0,len(nodes)):
     tempArray=[]
     tempArray.append(nodes[i]['id'])
@@ -78,6 +80,11 @@ def beginSearch():
   edges.to_csv(edgeLocation)
   nodes = pd.DataFrame(nodeArray, columns=['id', 'X','Y'])
   nodes.to_csv(nodeLocation)
+  info=os.path.join(path,"info.txt")
+  f = open(info, "w")
+  writestr=name+","+age
+  f.write(writestr)
+  f.close()
   
   drone1.sID=key
   drone2.sID=key
@@ -112,6 +119,11 @@ def connectSearch():
   isPath=os.path.isdir(path)
   
   if isPath==True:
+    info=[]
+    infoList=os.path.join(path,"info.txt")
+    f = open(infoList, "r")
+    for x in f:
+      info=x.split(",")
     pathList=os.path.join(path,"path.txt")
     f = open(pathList, "r")
     pathDict={}
@@ -123,4 +135,4 @@ def connectSearch():
       for j in range(0,len(tempArr)):
           tupleArr.append(tempArr[j].split(","))
       pathDict[i]=tupleArr
-  return(pathDict)
+  return({info,pathDict})
