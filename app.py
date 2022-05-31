@@ -123,7 +123,7 @@ def connectSearch():
     infoList=os.path.join(path,"info.txt")
     f = open(infoList, "r")
     for x in f:
-      info=x.split(",")
+      info=x
     pathList=os.path.join(path,"path.txt")
     f = open(pathList, "r")
     pathDict={}
