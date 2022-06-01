@@ -38,6 +38,14 @@ socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
 
+def background_thread():
+    """Example of how to send server generated events to clients."""
+    count = 0
+    while True:
+        socketio.sleep(3)
+        count += 1
+        
+
 #each app route method refers to either a page that can viewed or a backend function 
 @app.route('/')
 def home():
@@ -151,5 +159,13 @@ def handle_message(data):
     print('received message: ' + str(data))
     emit('test_response', {'data': 'Test response sent'})
 
+@socketio.event
+def connect():
+    global thread
+    with thread_lock:
+        if thread is None:
+            thread = socketio.start_background_task(background_thread)
+    emit('my_response', {'data': 'Connected', 'count': 0})
+    
 if __name__ == '__main__':
     socketio.run(app)
