@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_socketio import SocketIO, emit
 import os
 import pandas as pd
 import csv
@@ -31,6 +32,9 @@ drone4=drone(0,100,[750,250],"")
 #intial setup for the flask system
 app= Flask(__name__, template_folder='Templates')
 app.secret_key="flyboy"
+socketio = SocketIO(app, async_mode=async_mode)
+thread = None
+thread_lock = Lock()
 
 #each app route method refers to either a page that can viewed or a backend function 
 @app.route('/')
@@ -139,3 +143,6 @@ def connectSearch():
   else:
     returnDict="False"
   return(returnDict)
+
+if __name__ == '__main__':
+    socketio.run(app)
