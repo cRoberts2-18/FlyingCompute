@@ -44,7 +44,7 @@
 <div id="update" style="display:none">
 <form class="form">
 	<input type=button id = "Complete" value = "Target Located">
-	<input type=button id = "Submit" value = "Submit">
+	<input type=button id = "Update" value = "Provide Update">
 </form>
 </div>
   
@@ -99,6 +99,26 @@ function changeTeam(){
 	}
 
 }
+	
+	
+ $(document).ready(function() {
+            // Connect to the Socket.IO server.
+            // The connection URL has the following format, relative to the current page:
+            //     http[s]://<domain>:<port>[/<namespace>]
+            var socket = io();
+
+            // Test response received from server is handled here
+            socket.on('test_response', function(msg) {
+                console.log(msg)
+            })
+            // Handlers for the different forms in the page.
+            // These accept data from the user and send it to the server in a
+            // variety of ways
+            $('#Update').click(function() {
+                socket.emit('test_message', {data: 'Test message sent'});
+            });
+        });	
+
 </script>
 </body>
 </html>
