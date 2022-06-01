@@ -1,6 +1,4 @@
 from flask import Flask, render_template, request, redirect, url_for, session
-from flask_socketio import SocketIO, emit
-from threading import Lock
 import os
 import pandas as pd
 import csv
@@ -33,18 +31,7 @@ drone4=drone(0,100,[750,250],"")
 #intial setup for the flask system
 app= Flask(__name__, template_folder='Templates')
 app.secret_key="flyboy"
-async_mode=None
-socketio = SocketIO(app, async_mode=async_mode)
-thread = None
-thread_lock = Lock()
 
-def background_thread():
-    """Example of how to send server generated events to clients."""
-    count = 0
-    while True:
-        socketio.sleep(3)
-        count += 1
-        
 
 #each app route method refers to either a page that can viewed or a backend function 
 @app.route('/')
@@ -154,18 +141,4 @@ def connectSearch():
     returnDict="False"
   return(returnDict)
 
-@socketio.on('test_message')
-def handle_message(data):
-    print('received message: ' + str(data))
-    emit('test_response', {'data': 'Test response sent'})
 
-@socketio.event
-def connect():
-    global thread
-    with thread_lock:
-        if thread is None:
-            thread = socketio.start_background_task(background_thread)
-    emit('my_response', {'data': 'Connected', 'count': 0})
-    
-if __name__ == '__main__':
-    socketio.run(app)
