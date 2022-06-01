@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
- 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+   
 
 
 <title>Base Camp view</title>
@@ -21,9 +22,6 @@
 </header>
 
 <body>
-
-<>
-
 
 <div id="mySidebar" class="sidebar" style="width:250px">
 	
@@ -199,7 +197,41 @@
 			}
    		})
     });
+$(document).ready(function() {
+      // Connect to the Socket.IO server.
+      // The connection URL has the following format, relative to the current page:
+      //     http[s]://<domain>:<port>[/<namespace>]
+      //var socket = io();
+      var socket = io();
+			
+      socket.on('search_over', function(msg) {
+        console.log(msg);
+        Finish();
+      })
+      socket.on('update_connect', function(msg) {
+        document.getElementById("body").innerHTML+="<tr><td>Team member connected: "+msg['data']+"</td></tr>";
+      })
+      socket.on('confirm_block', function(msg) {
+        document.getElementById("body").innerHTML+="<tr><td>"+msg['block']+"</td></tr>";
+        document.getElementById("body").innerHTML+="<tr><td>Recomputed Paths can be seen below</td></tr>";
+        for(let i=1; i<=Object.keys(msg['path']).length;i++){
+						console.log(msg['path'][i][0])
+						path=""
+						for(let j=0;j<msg['path'][i].length;j++){
+							if(j==0){
+								path+=msg['path'][i][j][0]
+								path+=","
+							}
+							path+=msg['path'][i][j][1]
+							if(j<msg['path'][i].length-1){
+								path+=","
+							}
+						}
+						document.getElementById("body").innerHTML+="<tr><td>Team "+i+" pathing: "+path+"</td></tr>";
+					}
 
+      })
+});	
 </script>
 </body>
 </html>

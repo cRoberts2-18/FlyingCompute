@@ -4,25 +4,24 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
-   
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.4/socket.io.js" integrity="sha512-aMGMvNYu8Ue4G+fHa359jcPb1u+ytAF+P2SCb+PxrjCdO3n3ZTxJ30zuH39rimUggmTwmh2u7wvQsDTHESnmfQ==" crossorigin="anonymous"></script>
+     
 
 
 <title>Search Team view</title>
 </head>
 <header id="header">
 <h2 class="right">Search Team View<h2>
-<div class="navbar">
-  <a id="pathButton" href=# onclick="path()" style="display:hidden;"><optionL>Path</optionL></a>
-  <a id="updateButton" href=# onclick="update()" style="display:hidden;"><optionL>Update</optionL></a>	
-  <div class="dropdown" style="float: right;">
-    <button class="dropbtn"> Settings
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content" style="position:absolute; right:0;">
-      <a href=#>Testing</a>
-      
-    </div>
-  </div>	
+<div class="navbar">	
+	<div class="dropdown" style="float: right;">
+		<button class="dropbtn"> Settings
+		  <i class="fa fa-caret-down"></i>
+		</button>
+		<div class="dropdown-content" style="position:absolute; right:0;">
+		  <a href=#>Testing</a>
+		  
+		</div>
+	  </div>
 </div>
 </header>
 
@@ -30,11 +29,13 @@
 <div id="form">
 	<form class="form" style="top:50%;">Please enter your connection key:<br><br>
 		<input type="text" id="key" name="key" placeholder="Connection Key" class = "box"><br><br>
+		<label for="Name" style="font-size: 20px;">Enter name</label><br><input type="text" id="Name" name="Name" placeholder="Name" class = "box"><br><br>
 		<input class="buttonstyle" type=button id = "Submit" value = "Submit">
 	</form>
 </div>
 <div id="path" style="display:none">
 <input type=number name="team" id="team" min="1" onchange="changeTeam()" value="1" style="text-align:center">
+<input type="button" class="buttonstyle" id = "Complete" value="Target Located">
 <table id="pathing" class="changeTable">
     <thead id="head"></thead>
     <tbody id="body"></tbody>
@@ -42,8 +43,7 @@
 </div>
 <div id="update" style="display:none">
 <form class="form">
-	<input type=button id = "Complete" value = "Target Located">
-	<input type=button id = "Update" value = "Provide Update">
+	<br>
 </form>
 </div>
   
@@ -63,22 +63,42 @@ var pathDict;
 					}
 					else{
 						var infoArr=msg[0].split(",")
-						document.getElementById("head").innerHTML="<tr><td>Name: "+infoArr[0]+"</td><td>Age: "+infoArr[1]+"</td></tr><tr><td>Trail</td><td>Searched</td></tr>"
+						document.getElementById("head").innerHTML="<tr><td>Name: "+infoArr[0]+"</td><td>Age: "+infoArr[1]+"</td><td></td></tr><tr><td>Trail</td><td>Searched</td><td>Route Blocked</td></tr>"
 						len=Object.keys(msg[1]).length;
 						for(let i=0;i<msg[1][0].length;i++){
-							document.getElementById("body").innerHTML+="<tr><td>"+msg[1][0][i]+"</td><td><input type=checkbox id=\""+msg[1][0][i]+"\"></td></tr>";
+							document.getElementById("body").innerHTML+="<tr><td>"+msg[1][0][i]+"</td><td><input type=checkbox id=\""+i+msg[1][0][i]+"\"  onchange=\"pathUpdate('"+i+msg[1][0][i]+"','"+msg[1][0][i]+"')\"></td><td><input type=button value=\"Blocked\" onclick=\"blocked('"+msg[1][0][i]+"')\"></td></tr>";
+							
 						}
 						pathDict=msg[1];
 						document.getElementById("form").style.display="none";
 						document.getElementById("path").style.display="block";
-						document.getElementById("updateButton").style.display="block";
-						document.getElementById("pathButton").style.display="block";
 						document.getElementById("team").max=len;
+						var socket = io();
+						var name =document.getElementById("Name").value
+						socket.emit('user_connect', name);
 					
 					}
 				})
 			})
-    });   
+    });
+$(function() {
+	$("#Complete").click(function () {	
+	var key = document.getElementById("key").value
+	$.ajax({
+				method: "POST",
+				url: "{{ url_for('endSearch')}}",
+				data: {"key":key},
+				})
+				.done(function(msg){
+					alert("Target Located Successfully, shutting down")
+					location.reload();
+					
+			})
+		})
+});
+
+
+
 function update(){
 	document.getElementById("path").style.display="none";
 	document.getElementById("update").style.display="block";
@@ -94,11 +114,55 @@ function changeTeam(){
 	document.getElementById("body").innerHTML="";
 	index=(document.getElementById("team").value)-1;
 	for(let i=0;i<pathDict[index].length;i++){
-		document.getElementById("body").innerHTML+="<tr><td>"+pathDict[index][i]+"</td><td><input type=checkbox id=\""+pathDict[index][i]+"\"></td></tr>";
+		document.getElementById("body").innerHTML+="<tr><td>"+pathDict[index][i]+"</td><td><input type=checkbox id=\""+i+pathDict[index][i]+"\" onchange=\"pathUpdate('"+i+pathDict[index][i]+"','"+pathDict[index][i]+"')\"></td><td><input type=button value=\"Blocked\" onclick=\"blocked('"+pathDict[index][i]+"')\"></td></tr>";
 	}
 
 }
-		
+function blocked(path){
+	var key = document.getElementById("key").value;
+	var team = document.getElementById("team").max;
+	var socket = io();
+	socket.emit('blocked_path', {data: path,team: team,key: key});
+}
+
+function pathUpdate(id,edge){
+	var key = document.getElementById("key").value;
+	var checked=1
+	if(document.getElementById(id).checked){
+		checked=1;
+	}
+	else{
+		checked=-1;
+	}
+	var team=(document.getElementById("team").value)-1;
+	var socket = io();
+	socket.emit('location_update', {checked:checked,edge:edge,team:team, key: key});
+
+}
+
+
+$(document).ready(function() {
+            // Connect to the Socket.IO server.
+            // The connection URL has the following format, relative to the current page:
+            //     http[s]://<domain>:<port>[/<namespace>]
+            //var socket = io();
+            var socket = io();			
+			$('#Complete').click(function() {
+                socket.emit('end_search', {data: 'Search Over'});
+            });
+
+			socket.on('new_pathing', function(msg) {
+				document.getElementById("body").innerHTML="";
+				index=(document.getElementById("team").value)-1;
+				for(let i=0;i<msg['path'][index].length;i++){
+							document.getElementById("body").innerHTML+="<tr><td>"+msg['path'][index][i]+"</td><td><input type=checkbox id=\""+i+msg['path'][index][i]+"\"  onchange=\"pathUpdate('"+i+msg['path'][index][i]+"','"+msg['path'][index][i]+"')\"></td><td><input type=button value=\"Blocked\" onclick=\"blocked('"+msg['path'][index][i]+"')\"></td></tr>";
+							
+					}
+				pathDict=msg['path'];
+			});
+
+
+        });	
 
 </script>
 </body>

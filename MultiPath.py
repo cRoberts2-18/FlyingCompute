@@ -48,7 +48,7 @@ def pathCompute(teams,nodepath,edgepath):
     nodelist = pd.read_csv(nodepath)
 
     g=createGraph(edgelist,nodelist)
-
+    
     teamLocations={}
     teamEdgeList={}
 
@@ -63,7 +63,7 @@ def pathCompute(teams,nodepath,edgepath):
     edges=[]
     nodes=[]
     for i, row in edgelist.iterrows():
-        edges.append([row[1],row[2],0])
+        edges.append([row[1],row[2],int(row[6])])
 
     for i, row in nodelist.iterrows():
         nodes.append([row[1],(row[2],row[3])])
@@ -180,7 +180,7 @@ def pathCompute(teams,nodepath,edgepath):
 
     return(teamEdgeList)
             
-    
+
             
 
                         

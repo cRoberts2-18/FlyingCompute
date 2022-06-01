@@ -1,0 +1,7 @@
+,node1,node2,trail,distance,color,estimate
+0,start,r1,default,1000,black,0
+1,start,l2,default,1000,black,0
+2,start,r2,default,1000000,black,0
+3,r1,l2,default,1000000,black,0
+4,r1,r2,default,1000,black,0
+5,l2,r2,default,1000,black,0
