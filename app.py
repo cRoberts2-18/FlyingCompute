@@ -32,6 +32,7 @@ drone4=drone(0,100,[750,250],"")
 #intial setup for the flask system
 app= Flask(__name__, template_folder='Templates')
 app.secret_key="flyboy"
+async_mode=None
 socketio = SocketIO(app, async_mode=async_mode)
 thread = None
 thread_lock = Lock()
