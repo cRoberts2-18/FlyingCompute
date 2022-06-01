@@ -39,11 +39,11 @@ thread_lock = Lock()
 #each app route method refers to either a page that can viewed or a backend function 
 @app.route('/')
 def home():
-  return render_template('base.html')
+  return render_template('base.html', async_mode=socketio.async_mode)
 
 @app.route('/search/')
 def search():
-  return render_template('Search.html')
+  return render_template('Search.html', async_mode=socketio.async_mode)
 
 @app.route('/BeginSearch/', methods = ['GET', 'POST'])
 def beginSearch():
@@ -143,6 +143,11 @@ def connectSearch():
   else:
     returnDict="False"
   return(returnDict)
+
+@socketio.on('test_message')
+def handle_message(data):
+    print('received message: ' + str(data))
+    emit('test_response', {'data': 'Test response sent'})
 
 if __name__ == '__main__':
     socketio.run(app)
